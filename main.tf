@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "employeeportal" {
    
   }
 }
-/* resource "tls_private_key" "pk" {
+resource "tls_private_key" "pk" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
@@ -73,4 +73,4 @@ resource "aws_instance" "employeePortal" {
     private_key = var.private_key
     timeout     = "4m"
   }
-} */
+}
