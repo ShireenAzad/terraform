@@ -13,9 +13,9 @@ variable "instance_type" {
   description = "instance type for ec2"
   default     =  "t2.micro"
 }
-var "public_key"{
+variable "public_key"{
 
 }
-var "private_key"{
-  
+variable "private_key"{
+
 }
