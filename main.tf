@@ -12,6 +12,14 @@ resource "aws_s3_bucket" "employeeportal" {
    
   }
 }
+data "aws_s3_bucket" "employeeportal" {
+  bucket = "employeeportalbucket"
+}
+
+output "my_bucket_name" {
+  value = "${data.aws_s3_bucket.employeeportal.employeeportalbucket}"
+}
+
 resource "tls_private_key" "pk" {
   algorithm = "RSA"
   rsa_bits  = 4096
