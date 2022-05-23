@@ -3,7 +3,8 @@ provider "aws" {
 }
 
 ## 1st create only s3 bucket 
-resource "aws_s3_bucket" "employeeportal" {
+##After creating s3 bucket commenting it out
+/* resource "aws_s3_bucket" "employeeportal" {
   bucket = "employeeportalbucket"
   acl    = "public-read-write"
 
@@ -11,7 +12,7 @@ resource "aws_s3_bucket" "employeeportal" {
     Name        = "employeeportalbucket"
    
   }
-}
+} */
 data "aws_s3_bucket" "employeeportal" {
   bucket = "employeeportalbucket"
 }
