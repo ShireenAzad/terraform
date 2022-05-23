@@ -1,6 +1,6 @@
 provider "aws" {
   region              = var.aws_region
-  profile             = "shireen_syed"
+  profile             = "default"
 }
 
 ## 1st create only s3 bucket 
