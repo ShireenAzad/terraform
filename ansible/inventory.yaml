@@ -1,6 +1,6 @@
 all:
   hosts:
-    "{{REACT_APP_IP_ADDRESS}}":
+    "{{public_ip}}":
       ansible_ssh_extra_args: -o StrictHostKeyChecking=no
       ansible_ssh_private_key_file: /Users/shireenazad/.ssh/id_rsa
       ansible_user: ubuntu
