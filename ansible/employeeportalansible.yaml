@@ -25,7 +25,9 @@
     - name: Installing npm
       ansible.builtin.shell:
         cmd: sudo apt install npm 
-
+    - name: Installing pm
+      ansible.builtin.shell:
+        cmd: npm install pm2 -g
     - name: Running the Spring Boot Application
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/src/main/java/com/everestengineering/employeeportalapplication/
@@ -33,5 +35,9 @@
     - name: Installing node modules
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/src
-        cmd:  npm install |  npm start
-  
+        cmd:  npm install 
+    - name: Building
+      ansible.builtin.shell:
+        chdir: /home/ubuntu/app/frontend/src
+        cmd: pm2 start npm -- start
+   
