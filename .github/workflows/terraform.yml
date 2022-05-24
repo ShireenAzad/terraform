@@ -96,7 +96,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
       - name: Terraform Output
-        run: export $public_ip= $ (terraform output REACT_APP_IP_ADDRESS)
+        run: export public_ip= $ (terraform output REACT_APP_IP_ADDRESS)
       - name: Running Ansible
         working-directory: ansible/ 
         run: ansible-playbook -i inventory employeeportalansible.yaml
