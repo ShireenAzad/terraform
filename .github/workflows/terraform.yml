@@ -97,8 +97,6 @@ jobs:
         run: terraform apply -auto-approve -input=false
       - name: Terraform Output
         run: terraform output > .env
-      - name : Terraform output
-        run: public_ip= terraform output
       - name: Running Ansible
         working-directory: ansible/ 
-        run: ansible-playbook -i inventory.yaml --limit=${public_ip} employeeportalansible.yaml
+        run: ansible-playbook -i inventory.yaml --limit=$REACT_APP_IP_ADDRESS employeeportalansible.yaml

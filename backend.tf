@@ -4,6 +4,5 @@ terraform {
     bucket     = "employeeportalbucket"
     key        = "terraform.tfstate"
     encrypt    = "false"
-    profile    = "shireen_syed"
   }
 }
