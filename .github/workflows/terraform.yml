@@ -96,7 +96,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
       - name: Terraform Output
-        run: terraform output > .env
+        run: export $public_ip= terraform output
       - name: Running Ansible
         working-directory: ansible/ 
-        run: ${REACT_APP_IP_ADDRESS} | ansible-playbook -i inventory.yaml --limit=${REACT_APP_IP_ADDRESS} employeeportalansible.yaml
+        run: ansible-playbook -i inventory employeeportalansible.yaml
