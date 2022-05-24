@@ -99,4 +99,4 @@ jobs:
         run: terraform output > .env
       - name: Running Ansible
         working-directory: ansible/ 
-        run: ansible-playbook -i inventory.yaml --limit=$REACT_APP_IP_ADDRESS employeeportalansible.yaml
+        run: ansible-playbook -i inventory.yaml --limit=${REACT_APP_IP_ADDRESS} employeeportalansible.yaml
