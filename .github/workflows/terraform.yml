@@ -99,4 +99,4 @@ jobs:
         run: export PUBLIC_IP=$(terraform output -raw REACT_APP_IP_ADDRESS)
       - name: Running Ansible
         working-directory: ansible/ 
-        run: ansible-playbook -i inventory employeeportalansible.yaml
+        run: ansible-playbook -i inventory.yaml employeeportalansible.yaml
