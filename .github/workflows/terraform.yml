@@ -101,4 +101,4 @@ jobs:
         run: terraform output
       - name: Running Ansible
         working-directory: ansible/ 
-        run: ansible-playbook -i {{REACT_APP_IP_ADDRESS}},inventory.yaml employeeportalansible.yaml -vv
+        run: ansible-playbook -i inventory.yaml --limit=${REACT_APP_IP_ADDRESS} employeeportalansible.yaml
