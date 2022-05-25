@@ -98,9 +98,8 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run:  |
               terraform apply -auto-approve -input=false
-              echo $TF_VAR_private_key >> .env 
               export PUBLIC_IP=$(terraform output -raw public_ip)
-              echo $PUBLIC_IP
               cd ansible/
+              echo $PUBLIC_IP
               ansible-playbook -i  inventory employeeportalansible.yaml secrets.yaml --vault-password-file .vault_pass.txt --extra-vars PUBLIC_IP = $PUBLIC_IP
           
