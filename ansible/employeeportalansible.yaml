@@ -39,10 +39,8 @@
     - copy:
         dest: /home/ubuntu/target.txt
         content: "{{ PUBLIC_IP }}"
-    - name: Testing presence of IP Address
-      cmd: {{ ansible_ssh_host }}
     - name: Building
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/src/
-        cmd: REACT_APP_IP={{ ansible_ssh_host }}  pm2 start npm -- start
+        cmd: REACT_APP_IP={{ PUBLIC_IP }}  pm2 start npm -- start
    
