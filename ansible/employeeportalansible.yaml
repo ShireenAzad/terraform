@@ -43,5 +43,5 @@
     - name: Building
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/src/
-        cmd: REACT_APP_IP={{ PUBLIC_IP }}  pm2 start npm -- start
+        cmd: pm2 start npm -- start
    
