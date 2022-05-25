@@ -34,10 +34,10 @@
         cmd: nohup mvn spring-boot:run &
     - name: Installing node modules
       ansible.builtin.shell:
-        chdir: /home/ubuntu/app/frontend/src
+        chdir: /home/ubuntu/app/frontend/src/
         cmd:  npm install 
     - name: Building
       ansible.builtin.shell:
-        chdir: /home/ubuntu/app/frontend/src
-        cmd: REACT_APP_IP_ADDRESS={{ PUBLIC_IP }} pm2 start npm -- start
+        chdir: /home/ubuntu/app/frontend/src/
+        cmd: REACT_APP_IP_ADDRESS={{ PUBLIC_IP }} pm2 start npm -- start | console.log(REACT_APP_IP_ADDRESS)
    
