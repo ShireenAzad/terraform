@@ -98,5 +98,5 @@ jobs:
         run: terraform apply -auto-approve -input=false
       - name: Running Ansible
         working-directory: ansible/ 
-        run: export private_key = $TF_VAR_private_key
+        run: export $private_key = $TF_VAR_private_key
           
