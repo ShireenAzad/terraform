@@ -3,7 +3,6 @@
   become_user: root
   become_method: sudo
   tasks:
-    - debug: PUBLIC_IP=hostvars[inventory_hostname]['ansible_env'].SSH_CONNECTION.split(' ')[2]
     - name: Update apt packages
       apt:
         update_cache: yes
@@ -43,5 +42,5 @@
     - name: Building
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/src/
-        cmd: REACT_APP_IP={{ PUBLIC_IP }}  pm2 start npm -- start
+        cmd:  REACT_APP_IP="{{ PUBLIC_IP }}" pm2 start npm -- start
    
