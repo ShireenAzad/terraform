@@ -102,6 +102,6 @@ jobs:
               export ip=$(terraform output -raw REACT_APP_IP_ADDRESS)
               echo $ip
               cd ansible/
-              ansible-playbook secrets.yml --vault-password-file ~/.vault_pass.txt
+              ansible-playbook secrets.yaml --vault-password-file ~/.vault_pass.txt
               ansible-playbook -i  inventory employeeportalansible.yaml --extra-vars "public_ip = $ip" 
           
