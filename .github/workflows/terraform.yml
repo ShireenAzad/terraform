@@ -98,5 +98,6 @@ jobs:
         run: terraform apply -auto-approve -input=false
       - name: Running Ansible
         working-directory: ansible/ 
-        run: export public_ip= $(terraform output -raw REACT_APP_IP_ADDRESS) | 
-              export private_key = ${{secrets.TF_VAR_PRIVATE_KEY}}
+        run: export public_ip=$ (terraform output -raw REACT_APP_IP_ADDRESS)| 
+              export private_key =( TF_VAR_private_key)
+          
