@@ -99,5 +99,5 @@ jobs:
       - name: Running Ansible
         working-directory: ansible/ 
         run: export public_ip=$(terraform output -raw REACT_APP_IP_ADDRESS)| 
-              export private_key =$ (secrets.TF_VAR_PRIVATE_KEY)| 
+              export private_key =$ {secrets.TF_VAR_PRIVATE_KEY}| 
               ansible-playbook -i '$(public_ip),' --private-key $(private_key) ansible/employeeportalansible.yaml
