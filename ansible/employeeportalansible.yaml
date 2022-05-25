@@ -41,9 +41,7 @@
         dest: /home/ubuntu/target.txt
         content: "{{ PUBLIC_IP }}"
     - name: Building
-      environment: 
-        REACT_APP_API_BASE_URL: {{ PUBLIC_IP }}
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/src/
-        cmd: pm2 start npm -- start
+        cmd: REACT_APP_BASE_URL="{{ REACT_APP_API_BASE_URL }}" pm2 start npm -- start
    
