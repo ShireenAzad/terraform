@@ -36,12 +36,14 @@
     - name: Installing node modules
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/src/
-        cmd:  npm install 
+        cmd:  npm install | npm install dotenv --save
     - copy:
         dest: /home/ubuntu/target.txt
         content: "{{ PUBLIC_IP }}"
     - name: Building
+      environment: 
+        REACT_APP_API_BASE_URL: $PUBLIC_IP
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/src/
-        cmd: REACT_APP_API_BASE_URL='http://{{ PUBLIC_IP }}:8080' pm2 start npm -- start
+        cmd: pm2 start npm -- start
    
