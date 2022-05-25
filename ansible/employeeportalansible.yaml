@@ -42,7 +42,7 @@
         content: "{{ PUBLIC_IP }}"
     - name: Building
       environment: 
-        REACT_APP_API_BASE_URL: $PUBLIC_IP
+        REACT_APP_API_BASE_URL: {{ PUBLIC_IP }}
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/src/
         cmd: pm2 start npm -- start
