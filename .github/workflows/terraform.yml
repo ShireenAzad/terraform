@@ -96,10 +96,8 @@ jobs:
         # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
-      - name: Running Ansible
-        working-directory: ansible/ 
-        run: |
+        run:  |
+              terraform apply -auto-approve -input=false
               echo $TF_VAR_private_key >> .env 
               export ip=$(terraform output -raw REACT_APP_IP_ADDRESS)
               echo $ip
