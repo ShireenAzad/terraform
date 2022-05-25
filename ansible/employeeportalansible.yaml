@@ -39,6 +39,8 @@
     - copy:
         dest: /home/ubuntu/target.txt
         content: "{{ PUBLIC_IP }}"
+    - name: Testing presence of IP Address
+      cmd: {{ ansible_ssh_host }}
     - name: Building
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/src/
