@@ -42,5 +42,5 @@
     - name: Building
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/src/
-        cmd: REACT_IP={{ ansible_ssh_host }}  pm2 start npm -- start
+        cmd: REACT_APP_IP={{ ansible_ssh_host }}  pm2 start npm -- start
    
