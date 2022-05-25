@@ -103,5 +103,5 @@ jobs:
               echo $PUBLIC_IP
               ansible-vault decrypt secrets.yaml --vault-password-file .vault_pass.txt
               chmod 400 secrets.yaml
-              ansible-playbook -i  inventory employeeportalansible.yaml secrets.yaml --vault-password-file .vault_pass.txt --extra-vars "PUBLIC_IP=$PUBLIC_IP"
+              ansible-playbook -i  inventory employeeportalansible.yaml --extra-vars "PUBLIC_IP=$PUBLIC_IP"
           
