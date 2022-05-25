@@ -102,5 +102,5 @@ jobs:
               echo $TF_VAR_private_key >> .env 
               export public_ip=$(terraform output -raw REACT_APP_IP_ADDRESS)
               cd ../ansible/
-              ansible-playbook -i '$(public_ip),' --private-key $(process.env.TF_VAR_private_key) inventory employeeportalansible.yaml
+              ansible-playbook -i  inventory employeeportalansible.yaml --extra-vars public_ip = $public_ip
           
