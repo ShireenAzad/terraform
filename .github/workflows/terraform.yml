@@ -101,5 +101,6 @@ jobs:
         run: |
               echo $TF_VAR_private_key >> .env 
               export public_ip=$(terraform output -raw REACT_APP_IP_ADDRESS)
+              cd ansible/
               
           
