@@ -35,7 +35,7 @@
     - name: Installing node modules
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/src/
-        cmd:  npm install | echo $PUBLIC_IP
+        cmd:  npm install | REACT_APP_IP={{ PUBLIC_IP }} | echo REACT_APP_IP
     - name: Building
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/src/
