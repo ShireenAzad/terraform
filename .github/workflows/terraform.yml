@@ -101,6 +101,6 @@ jobs:
               export PUBLIC_IP=$(terraform output -raw public_ip)
               cd ansible/
               echo $PUBLIC_IP
-              chmod 400 $TF_VAR_private_key
+              chmod 400 secrets.yaml
               ansible-playbook -i  inventory employeeportalansible.yaml secrets.yaml --vault-password-file .vault_pass.txt --extra-vars "PUBLIC_IP=$PUBLIC_IP"
           
