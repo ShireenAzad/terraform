@@ -85,7 +85,7 @@ resource "aws_instance" "employeePortal" {
     timeout     = "4m"
   }
 provisioner "local-exec" {
-    command = "ansible-playbook -i '${aws_instance.employeePortal.public_ip},' --private-key ${var.private_key} ansible/employeeportalansible.yaml"
+    command = "ansible-playbook -i '$(aws_instance.employeePortal.public_ip),' --private-key $(var.private_key) ansible/employeeportalansible.yaml"
 }
 }
 output "public_ip" {
