@@ -13,9 +13,9 @@ provider "aws" {
    
   }
 } 
-data "aws_s3_bucket" "employeeportal" {
+/* data "aws_s3_bucket" "employeeportal" {
   bucket = "employeeportalbucket"
-}
+} */
 
 resource "tls_private_key" "pk" {
   algorithm = "RSA"
