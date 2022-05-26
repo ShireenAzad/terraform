@@ -97,13 +97,14 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run:  |
               terraform apply -auto-approve -input=false
-              REACT_APP_BASE_URL=$(terraform output -raw REACT_APP_BASE_URL)
+              PUBLIC_IP=$(terraform output -raw REACT_APP_BASE_URL)
               echo terraform output > .env
+              echo .env
               echo $REACT_APP_BASE_URL >> .env
               ls
               pwd
               cd ansible/
               ansible-vault decrypt secrets.yaml --vault-password-file .vault_pass.txt
               chmod 400 secrets.yaml
-              ansible-playbook -i  inventory employeeportalansible.yaml --extra-vars "REACT_APP_BASE_URL_IP=$REACT_APP_BASE_URL"
+              ansible-playbook -i  inventory employeeportalansible.yaml --extra-vars "PUBLIC_IP=$PUBLIC_IP"
                       
