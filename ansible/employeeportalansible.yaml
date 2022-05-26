@@ -21,7 +21,7 @@
         update: yes
     - name: Installing maven
       ansible.builtin.shell:
-        cmd: sudo apt install maven 
+        cmd: sudo apt install maven -y
 
     - name: Installing npm
       ansible.builtin.shell:
@@ -32,7 +32,7 @@
     - name: Running the Spring Boot Application
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/src/main/java/com/everestengineering/employeeportalapplication/
-        cmd: nohup mvn spring-boot:run &
+        cmd:  nohup mvn spring-boot:run -Dspring-boot.run.arguments="--spring.datasource.url=jdbc:postgresql://process.env.ENDPOINT/employee" & > ../nohup.out
     - name: Installing node modules
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/
