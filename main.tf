@@ -4,7 +4,7 @@ provider "aws" {
 
 ## 1st create only s3 bucket 
 ##After creating s3 bucket commenting it out
- /* resource "aws_s3_bucket" "employeeportal" {
+/* resource "aws_s3_bucket" "employeeportal" {
   bucket = "employeeportalbucket"
   acl    = "public-read-write"
 
@@ -30,29 +30,8 @@ resource "aws_key_pair" "employeeportalsecretkey" {
     command = "echo '${tls_private_key.pk.private_key_pem}' > ./employeeportalsecretkey.pem"
   }
 }
-resource "aws_security_group" "mydb1" {
-  name = "mydb1"
-
-  description = "RDS postgres servers (terraform-managed)"
-
-  # Only postgres in
-  ingress {
-    from_port = 5432
-    to_port = 5432
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # Allow all outbound traffic.
-  egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
 #Create security group with firewall rules
-resource "aws_security_group" "security_port" {
+/* resource "aws_security_group" "security_port" {
   name        = "security_port"
   description = "security group "
 
@@ -99,26 +78,29 @@ resource "aws_security_group" "security_port" {
   tags = {
     Name = "security_port"
   }
-}
+} */
 resource "aws_db_instance" "employeeportaldatabase" {
-  allocated_storage   = 10
-  engine              = "postgres"
-  engine_version      = "14.2"
-  instance_class      = "db.t3.micro"
-  name                = "postgresdatabase"
-  username            = "shireenazad"
-  password            = "postgres"
-  publicly_accessible = true
-  skip_final_snapshot = true
-  port = 5432
-  vpc_security_group_ids   = ["${aws_security_group.mydb1.id}"]
+  allocated_storage      = 10
+  engine                 = "postgres"
+  engine_version         = "14.2"
+  instance_class         = "db.t3.micro"
+  name                   = "postgresdatabase"
+  username               = "shireenazad"
+  password               = "postgres"
+  publicly_accessible    = true
+  skip_final_snapshot    = true
+  port                   = 5432
+  vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
 
 }
 resource "aws_instance" "employeePortal" {
-  ami             = "ami-0756a1c858554433e"
-  key_name        = "employeeportalsecretkey"
-  instance_type   = var.instance_type
-  security_groups = ["security_port"]
+  ami           = "ami-0756a1c858554433e"
+  key_name      = "employeeportalsecretkey"
+  instance_type = var.instance_type
+  subnet_id     = aws_subnet.prod-subnet-public-1.id
+
+  vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
+
   tags = {
     Name = "employeeportal_ec2_instance"
   }
