@@ -30,7 +30,27 @@ resource "aws_key_pair" "employeeportalsecretkey" {
     command = "echo '${tls_private_key.pk.private_key_pem}' > ./employeeportalsecretkey.pem"
   }
 }
+resource "aws_security_group" "mydb1" {
+  name = "mydb1"
 
+  description = "RDS postgres servers (terraform-managed)"
+
+  # Only postgres in
+  ingress {
+    from_port = 5432
+    to_port = 5432
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Allow all outbound traffic.
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 #Create security group with firewall rules
 resource "aws_security_group" "security_port" {
   name        = "security_port"
@@ -88,9 +108,11 @@ resource "aws_db_instance" "employeeportaldatabase" {
   name                = "postgresdatabase"
   username            = "shireenazad"
   password            = "postgres"
-  security_group_names = ["security_port"]
   publicly_accessible = true
   skip_final_snapshot = true
+  port = 5432
+  vpc_security_group_ids   = ["${aws_security_group.mydb1.id}"]
+
 }
 resource "aws_instance" "employeePortal" {
   ami             = "ami-0756a1c858554433e"
