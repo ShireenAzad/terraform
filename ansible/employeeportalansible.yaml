@@ -5,8 +5,8 @@
   tasks:
     
     - name: Update apt packages
-      apt:
-        update_cache: yes
+      ansible.builtin.shell:
+        cmd: sudo apt update
     - name: Install git
       apt:
         name: git
@@ -19,6 +19,7 @@
         clone: yes
         force: yes
         update: yes
+   
     - name: Installing npm
       ansible.builtin.shell:
         cmd: sudo apt install npm 
