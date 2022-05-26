@@ -1,5 +1,5 @@
 provider "aws" {
-  region              = var.aws_region
+  region = var.aws_region
 }
 
 ## 1st create only s3 bucket 
@@ -42,7 +42,7 @@ resource "aws_security_group" "security_port" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
- ingress {
+  ingress {
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
@@ -80,7 +80,17 @@ resource "aws_security_group" "security_port" {
     Name = "security_port"
   }
 }
-
+resource "aws_db_instance" "employeeportaldatabase" {
+  allocated_storage   = 10
+  engine              = "postgres"
+  engine_version      = "14.2-R1"
+  instance_class      = "db.t3.micro"
+  name                = "postgresdatabase"
+  username            = "shireenazad"
+  password            = "postgres"
+  publicly_accessible = true
+  skip_final_snapshot = true
+}
 resource "aws_instance" "employeePortal" {
   ami             = "ami-0756a1c858554433e"
   key_name        = "employeeportalsecretkey"
@@ -96,10 +106,4 @@ resource "aws_instance" "employeePortal" {
     private_key = var.private_key
     timeout     = "4m"
   }
-provisioner "local-exec" {
-    command = "ansible-playbook -i '$(aws_instance.employeePortal.public_ip),' --private-key $(var.private_key) ansible/employeeportalansible.yaml"
-}
-}
-output "public_ip" {
-  value = aws_instance.employeePortal.public_ip
 }
