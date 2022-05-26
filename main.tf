@@ -90,7 +90,7 @@ resource "aws_db_instance" "employeeportaldatabase" {
   publicly_accessible    = true
   skip_final_snapshot    = true
   port                   = 5432
-  security_group_names= [aws_security_group.ssh-allowed.id]
+security_group_names =["${aws_security_group.db.id}"]
 
 }
 resource "aws_instance" "employeePortal" {
@@ -99,7 +99,7 @@ resource "aws_instance" "employeePortal" {
   instance_type = var.instance_type
   subnet_id     = aws_subnet.prod-subnet-public-1.id
 
-  vpc_security_group_ids = ["${aws_security_group.db.id}"]
+  vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
 
   tags = {
     Name = "employeeportal_ec2_instance"
