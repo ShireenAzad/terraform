@@ -90,8 +90,6 @@ resource "aws_db_instance" "employeeportaldatabase" {
   publicly_accessible    = true
   skip_final_snapshot    = true
   port                   = 5432
-security_group_names =["${aws_security_group.db.id}"]
-
 }
 resource "aws_instance" "employeePortal" {
   ami           = "ami-0756a1c858554433e"
