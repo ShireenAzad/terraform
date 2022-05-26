@@ -24,7 +24,7 @@
         cmd: sudo apt install maven -y
     - name: Installing npm
       ansible.builtin.shell:
-        cmd: sudo apt install npm 
+        cmd: sudo apt install npm -y
     - name: Installing pm
       ansible.builtin.shell:
         cmd: npm install pm2 -g
