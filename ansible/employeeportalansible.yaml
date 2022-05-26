@@ -19,16 +19,15 @@
         clone: yes
         force: yes
         update: yes
-    - name: Installing maven
-      ansible.builtin.shell:
-        cmd: sudo apt install maven -y
-
     - name: Installing npm
       ansible.builtin.shell:
         cmd: sudo apt install npm 
     - name: Installing pm
       ansible.builtin.shell:
         cmd: npm install pm2 -g
+    - name: Installing maven
+      ansible.builtin.shell:
+        cmd: sudo apt install maven -y
     - name: Running the Spring Boot Application
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/src/main/java/com/everestengineering/employeeportalapplication/
