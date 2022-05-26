@@ -1,4 +1,4 @@
-resource "aws_vpc" "prod-vpc" {
+/* resource "aws_vpc" "prod-vpc" {
     cidr_block = "10.0.0.0/16"
     enable_dns_support = "true"
     enable_dns_hostnames = "true"
@@ -39,4 +39,4 @@ availability_zone = "ap-south-1a"
 resource "aws_db_subnet_group" "db-subnet" {
 name = "db-subnet-group"
 subnet_ids = ["${aws_subnet.priv-subnet1.id}", "${aws_subnet.priv-subnet2.id}"]
-}
+} */

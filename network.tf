@@ -1,4 +1,4 @@
-# create an IGW (Internet Gateway)
+/* # create an IGW (Internet Gateway)
 # It enables your vpc to connect to the internet
 resource "aws_internet_gateway" "prod-igw" {
     vpc_id = "${aws_vpc.prod-vpc.id}"
@@ -74,4 +74,4 @@ ingress {
     tags = {
         Name = "ssh-allowed"
     }
-}
+} */

@@ -31,7 +31,7 @@ resource "aws_key_pair" "employeeportalsecretkey" {
   }
 }
 #Create security group with firewall rules
-/* resource "aws_security_group" "security_port" {
+ resource "aws_security_group" "security_port" {
   name        = "security_port"
   description = "security group "
 
@@ -78,7 +78,7 @@ resource "aws_key_pair" "employeeportalsecretkey" {
   tags = {
     Name = "security_port"
   }
-} */
+} 
 resource "aws_db_instance" "employeeportaldatabase" {
   allocated_storage      = 10
   engine                 = "postgres"
@@ -90,16 +90,13 @@ resource "aws_db_instance" "employeeportaldatabase" {
   publicly_accessible    = false
   skip_final_snapshot    = true
   port                   = 5432
-  db_subnet_group_name = "${aws_db_subnet_group.db-subnet.name}"
+  //db_subnet_group_name = "${aws_db_subnet_group.db-subnet.name}"
 }
 resource "aws_instance" "employeePortal" {
   ami           = "ami-0756a1c858554433e"
   key_name      = "employeeportalsecretkey"
   instance_type = var.instance_type
-  subnet_id     = aws_subnet.prod-subnet-public-1.id
-
-  vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
-
+  security_groups = ["security_port"]
   tags = {
     Name = "employeeportal_ec2_instance"
   }
