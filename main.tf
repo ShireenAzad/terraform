@@ -83,7 +83,7 @@ resource "aws_security_group" "security_port" {
 resource "aws_db_instance" "employeeportaldatabase" {
   allocated_storage   = 10
   engine              = "postgres"
-  engine_version      = "14.2-R1"
+  engine_version      = "14.2"
   instance_class      = "db.t3.micro"
   name                = "postgresdatabase"
   username            = "shireenazad"
