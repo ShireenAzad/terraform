@@ -90,6 +90,8 @@ resource "aws_db_instance" "employeeportaldatabase" {
   publicly_accessible    = true
   skip_final_snapshot    = true
   port                   = 5432
+  subnet_id     = aws_subnet.prod-subnet-public-1.id
+  vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
 }
 resource "aws_instance" "employeePortal" {
   ami           = "ami-0756a1c858554433e"
