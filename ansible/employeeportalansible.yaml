@@ -35,16 +35,18 @@
         cmd: nohup mvn spring-boot:run &
     - name: Installing node modules
       ansible.builtin.shell:
-        chdir: /home/ubuntu/app/frontend/src/
-        cmd:  npm install | npm install dotenv --save
-    - copy:
-        dest: /home/ubuntu/target.txt
-        content: "{{ PUBLIC_IP }}"
-    - name: Building
-      environment:
-        REACT_APP_BASE_URL: "{{ PUBLIC_IP }}"
-        shell: "echo REACT_APP_BASE_URL=$IREACT_APP_BASE_URL > /home/ubuntu/app/frontend/src/.env"
+        chdir: /home/ubuntu/app/frontend/
+        cmd:  npm install 
+    - name: Installing node modules
       ansible.builtin.shell:
-        chdir: /home/ubuntu/app/frontend/src/
+        chdir: /home/ubuntu/app/frontend/
+        cmd: npm install dotenv --save
+    - name: Installing node modules
+      ansible.builtin.shell:
+        chdir: /home/ubuntu/app/frontend/
+        cmd: npm audit fix
+    - name: Building
+      ansible.builtin.shell:
+        chdir: /home/ubuntu/app/frontend/
         cmd: REACT_APP_BASE_URL="{{ PUBLIC_IP }}" pm2 start npm -- start
    
