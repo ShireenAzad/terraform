@@ -90,7 +90,7 @@ resource "aws_db_instance" "employeeportaldatabase" {
   publicly_accessible    = true
   skip_final_snapshot    = true
   port                   = 5432
-  vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
+  security_group_names= [aws_security_group.ssh-allowed.id]
 
 }
 resource "aws_instance" "employeePortal" {
