@@ -88,7 +88,7 @@ resource "aws_db_instance" "employeeportaldatabase" {
   name                = "postgresdatabase"
   username            = "shireenazad"
   password            = "postgres"
-  security_groups = ["security_port"]
+  security_group_names = ["security_port"]
   publicly_accessible = true
   skip_final_snapshot = true
 }
