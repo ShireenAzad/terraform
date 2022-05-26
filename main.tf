@@ -87,11 +87,10 @@ resource "aws_db_instance" "employeeportaldatabase" {
   name                   = "postgresdatabase"
   username               = "shireenazad"
   password               = "postgres"
-  publicly_accessible    = true
+  publicly_accessible    = false
   skip_final_snapshot    = true
   port                   = 5432
-  subnet_id     = aws_subnet.prod-subnet-public-1.id
-  vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
+  db_subnet_group_name = "${aws_db_subnet_group.db-subnet.name}"
 }
 resource "aws_instance" "employeePortal" {
   ami           = "ami-0756a1c858554433e"
