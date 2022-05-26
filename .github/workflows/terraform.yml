@@ -97,7 +97,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run:  |
               terraform apply -auto-approve -input=false
-              terrafoREACT_APP_BASE_URL=$(terraform output -raw REACT_APP_BASE_URL)
+              REACT_APP_BASE_URL=$(terraform output -raw REACT_APP_BASE_URL)
               echo terraform output > .env
               echo $REACT_APP_BASE_URL >> .env
               ls
