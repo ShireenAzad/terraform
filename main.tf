@@ -80,17 +80,6 @@ resource "aws_security_group" "security_port" {
     Name = "security_port"
   }
 }
-resource "aws_db_instance" "employeeportaldatabase" {
-  allocated_storage   = 10
-  engine              = "postgres"
-  engine_version      = "14.2"
-  instance_class      = "db.t3.micro"
-  name                = "postgresdatabase"
-  username            = "shireenazad"
-  password            = "postgres"
-  publicly_accessible = true
-  skip_final_snapshot = true
-}
 resource "aws_instance" "employeePortal" {
   ami             = "ami-0756a1c858554433e"
   key_name        = "employeeportalsecretkey"
