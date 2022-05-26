@@ -97,7 +97,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run:  |
               terraform apply -auto-approve -input=false
-              terrafoREACT_APP_BASE_URL=$(terraform output -raw public_ip)
+              terrafoREACT_APP_BASE_URL=$(terraform output -raw REACT_APP_BASE_URL)
               echo terraform output > /home/ubuntu/.env
               echo $REACT_APP_BASE_URL >> /home/ubuntu/.env
               cd ansible/
