@@ -97,7 +97,8 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run:  |
               terraform apply -auto-approve -input=false
-              echo terraform output --json | jq 'with_entries(.value |= .value)'
+              echo terraform output --json 
+              echo jq 'with_entries(.value |= .value)'
               cd ansible/
               ansible-vault decrypt secrets.yaml --vault-password-file .vault_pass.txt
               chmod 400 secrets.yaml
