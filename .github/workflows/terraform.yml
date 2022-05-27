@@ -97,15 +97,8 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run:  |
               terraform apply -auto-approve -input=false
-              PUBLIC_IP=$(terraform output -raw REACT_APP_BASE_URL)
-              END_POINT=$(terraform output -raw ENDPOINT)
-              echo terraform output > .env
-              echo .env
-              echo $REACT_APP_BASE_URL >> .env
-              ls
-              pwd
               cd ansible/
               ansible-vault decrypt secrets.yaml --vault-password-file .vault_pass.txt
               chmod 400 secrets.yaml
-              ansible-playbook -i  inventory eansible.yaml --extra-vars "PUBLIC_IP=$PUBLIC_IP,END_POINT=$END_POINT"
+              ansible-playbook -i  inventory eansible.yaml --extra-vars "$(terraform output --json | jq 'with_entries(.value |= .value)')"
                       

@@ -1,8 +1,8 @@
-output "REACT_APP_BASE_URL" {
+output "PUBLIC_IP" {
   value = aws_instance.employeePortal.public_ip
 
 }
-output "ENDPOINT" {
+output "END_POINT" {
     value = aws_db_instance.employeeportaldatabase.endpoint
   
 }
