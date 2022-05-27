@@ -38,7 +38,7 @@
     - name: Running the Spring Boot Application
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/src/main/java/com/everestengineering/employeeportalapplication/
-        cmd: nohup mvn spring-boot:run -Dspring-boot.run.arguments="\-Ddemo-host=jdbc:postgresql://{{END_POINT}}:5432/postgresdatabase"
+        cmd: nohup mvn spring-boot:run -Dspring-boot.run.arguments="\-Ddemo-host=jdbc:postgresql://terraform-20220527121207007700000001.crli2ms66ure.ap-south-1.rds.amazonaws.com:5432/postgresdatabase"
     - name: Remove node modules
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/
