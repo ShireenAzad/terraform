@@ -79,19 +79,6 @@ resource "aws_key_pair" "employeeportalsecretkey" {
     Name = "security_port"
   }
 } 
-resource "aws_db_instance" "employeeportaldatabase" {
-  allocated_storage      = 10
-  engine                 = "postgres"
-  engine_version         = "14.2"
-  instance_class         = "db.t3.micro"
-  name                   = "postgresdatabase"
-  username               = "shireenazad"
-  password               = "postgres"
-  publicly_accessible    = false
-  skip_final_snapshot    = true
-  port                   = 5432
-  //db_subnet_group_name = "${aws_db_subnet_group.db-subnet.name}"
-}
 resource "aws_instance" "employeePortal" {
   ami           = "ami-0756a1c858554433e"
   key_name      = "employeeportalsecretkey"
@@ -106,5 +93,20 @@ resource "aws_instance" "employeePortal" {
     user        = "ubuntu"
     private_key = var.private_key
     timeout     = "4m"
+  }
+}
+resource "aws_db_instance" "employeeportaldatabase" {
+  allocated_storage      = 10
+  engine                 = "postgres"
+  engine_version         = "14.2"
+  instance_class         = "db.t3.micro"
+  name                   = "postgresdatabase"
+  username               = "shireenazad"
+  password               = "postgres"
+  publicly_accessible    = false
+  skip_final_snapshot    = true
+  port                   = 5432
+  tags = {
+    Name = "employeeportal_database"
   }
 }
