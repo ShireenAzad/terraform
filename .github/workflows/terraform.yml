@@ -99,11 +99,6 @@ jobs:
               terraform apply -auto-approve -input=false
               PUBLIC_IP=$(terraform output -raw PUBLIC_IP)
               END_POINT=$(terraform output -raw END_POINT)
-              echo terraform output > .env
-              echo .env
-              echo $REACT_APP_BASE_URL >> .env
-              ls
-              pwd
               cd ansible/
               ansible-vault decrypt secrets.yaml --vault-password-file .vault_pass.txt
               chmod 400 secrets.yaml
