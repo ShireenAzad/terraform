@@ -3,7 +3,7 @@
   become_user: root
   become_method: sudo
   tasks:
-    - name: Installing updtae
+    - name: Installing update
       ansible.builtin.shell:
         cmd: sudo apt-get update
     - name: Update apt packages
@@ -14,6 +14,9 @@
         name: git
         state: present
         update_cache: yes
+    - name: Installing npm
+      ansible.builtin.shell:
+        cmd: ls
     - name: Clone github repository
       git:
         repo: https://github.com/ShireenAzad/EmployeePortal.git
@@ -26,37 +29,20 @@
       apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
       with_items:
         - maven
-    - name: Installing updtae
+    - name: Installing npm and pm
       ansible.builtin.shell:
-        cmd: sudo apt update
-    - name: Installing npm
-      ansible.builtin.shell:
-        cmd: sudo apt install curl -y
-    - name: add apt key for nodesource
-      apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-    - name: add repo for nodesource
-      apt_repository:
-        repo: 'deb https://deb.nodesource.com/node_0.10 {{ ansible_distribution_release }} main' 
-        update_cache: yes
-    - name: install nodejs
-      apt: name=nodejs
-    - name: Installing pm
-      ansible.builtin.shell:
-        cmd: npm install pm2 -g
+        cmd: sudo apt install npm -y |  npm install pm2 -g
     - name: Running the Spring Boot Application
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/src/main/java/com/everestengineering/employeeportalapplication/
-        cmd: nohup mvn spring-boot:run &
-    - name: Installing node modules
+        cmd: nohup mvn spring-boot:run -Dspring-boot.run.arguments="\-Ddemo-host=jdbc:postgresql://terraform-20220527121207007700000001.crli2ms66ure.ap-south-1.rds.amazonaws.com:5432/postgresdatabase" & > ../nohup.out
+    - name: Installing node modules and Dotenv
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/
-        cmd:  npm install 
-    - name: Installing node modules
-      ansible.builtin.shell:
-        chdir: /home/ubuntu/app/frontend/
-        cmd: npm install dotenv --save
+        cmd:  npm install | npm install dotenv --save
     - name: Building
       ansible.builtin.shell:
         chdir: /home/ubuntu/app/frontend/
         cmd: REACT_APP_BASE_URL="{{ PUBLIC_IP }}" pm2 start npm -- start
    
+  
